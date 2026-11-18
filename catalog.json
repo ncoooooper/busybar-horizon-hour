@@ -1,0 +1,6 @@
+{
+  "category": "utilities",
+  "short_description": "Count down to the next local sunrise or sunset with the current sky and season.",
+  "description": "Count down to the next local sunrise or sunset with the current sky and season.",
+  "changelog": "First release."
+}
