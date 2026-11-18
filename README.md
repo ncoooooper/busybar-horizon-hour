@@ -2,6 +2,20 @@
 
 Keep the next sunrise or sunset in view. The countdown uses the observer’s coordinates. A small sun rises or sinks beside the reading. The ground color follows the local meteorological season, and the forecast adds clouds, rain or snow.
 
+## Screen transitions
+
+Follow the countdown into the sky reading. On the countdown page the horizon and precipitation reflect the sample weather.
+
+![Horizon Hour front display. Follow the countdown into the sky reading. On the countdown page the horizon and precipitation reflect the sample weather.](media/guide/screen-transitions.gif)
+
+<details>
+
+<summary>Watch the rear display</summary>
+
+![Horizon Hour rear display during the recorded controls](media/guide/screen-transitions-rear.gif)
+
+</details>
+
 ## Setup
 
 Copy the Kyiv example and replace `latitude`, `longitude` and `place` for your observer. Use decimal degrees, with south and west negative. The companion selects the local time zone from the coordinates and refreshes the forecast every fifteen minutes. Python needs access to IANA time-zone data. On Windows install the `tzdata` package if ZoneInfo reports a missing zone. The public Open-Meteo endpoint is for eligible non-commercial use.
@@ -36,7 +50,7 @@ Install BUSY Bar Emulator and open it. From this repository run the following co
 ~/.busy-emulator/bin/busy-emulator dev --once
 ```
 
-The recordings use example responses on emulator firmware. Each display pixel is enlarged to a 9 × 9 square.
+The recordings use example responses on emulator firmware. Each LED occupies a 16 × 16 cell with a black border.
 
 Forecast and astronomical times by [Open-Meteo](https://open-meteo.com/en/docs).
 
