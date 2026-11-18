@@ -1,0 +1,19 @@
+{
+  "app": "horizon-hour",
+  "frames": [
+    5,
+    8
+  ],
+  "firmware": "1.3.1",
+  "inputs": [
+    [
+      "up"
+    ],
+    [
+      "down"
+    ]
+  ],
+  "source": "Recorded source response",
+  "exit": "finished",
+  "sha256": "0e6b97be1dafa20967e5a5c1daf1b4d180cfe4c5948700d91705df92880f7fb7"
+}

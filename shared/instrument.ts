@@ -1,7 +1,7 @@
 import {surface,label,panel,rect,wrap,type Frame,type MotionOptions} from "./surface";
 import {loadValues} from "./settings";
 
-export type InstrumentOptions={title:string;primary:string;accent:string;cadence:number;motion:MotionOptions;setup:string;marks?:(page:Page,pages:Page[],index:number)=>Frame};
+export type InstrumentOptions={title:string;primary:string;accent:string;cadence:number;motion:MotionOptions;setup:string;animationMs?:number;marks?:(page:Page,pages:Page[],index:number)=>Frame};
 export type Page={caption:string;value:string;lines:string[];fraction?:number};
 type Reading={pages:Page[];state:string;key:string;alert?:boolean;error?:string};
 
@@ -35,10 +35,12 @@ export function instrument(config:InstrumentOptions){
   }catch(e){error=String(e);if(!closed)refresh();}
   finally{loading=false;if(!closed)timer=setTimeout(()=>{timer=undefined;void pull();},Math.max(1500,config.cadence)*(error?2:1));}
  }
+ let animation:ReturnType<typeof setInterval>|undefined;
  const refresh=surface(draw,k=>{
   if(k==="up"||k==="down"){if(last&&!pinned)page=wrap(page+(k==="up"?1:-1),last.pages.length);}
   else if(k==="ok")void pull();
   else if(k==="start")pinned=!pinned;
- },()=>{closed=true;if(timer!==undefined)clearTimeout(timer);},config.motion);
+ },()=>{closed=true;if(animation!==undefined)clearInterval(animation);if(timer!==undefined)clearTimeout(timer);},config.motion);
+ if(config.animationMs)animation=setInterval(()=>{if(last&&!closed)refresh();},config.animationMs);
  void loadValues().then(v=>{if(closed)return;address=String(v?.bridge||"").trim();refresh();if(address)void pull();}).catch(e=>console.error("Settings",String(e)));
 }
